@@ -9,6 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    //Variables definition
+    var count = 0
+    var label :UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +24,9 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.frame = CGRect(x: 150, y: 150, width: 60, height: 60)
         label.text = "0"
+        
+        //set the global label var to be equal the local label
+        self.label = label
         
         //Add the label to the view hierarchy
         view.addSubview(label)
@@ -33,8 +41,15 @@ class ViewController: UIViewController {
         //Add Button to view hierarchy
         view.addSubview(button)
         
+        //Add the target action to the button
+        button.addTarget(self, action: #selector(ViewController.incrementCount), for: UIControlEvents.touchUpInside)
+        
     }
 
+    @objc func incrementCount(){
+        self.count += 1
+        self.label.text = "\(self.count)"
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
